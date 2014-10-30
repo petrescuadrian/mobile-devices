@@ -9,60 +9,92 @@
     tools:context="com.example.login.ProfileActivity" >
 
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/textPName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/txtPname"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textName"
-        android:layout_below="@+id/textName"
+        android:layout_below="@+id/textPName"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:cursorVisible="false"
         android:ems="10"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textEmail"
+        android:id="@+id/textPEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPemail"
         android:layout_below="@+id/txtPname"
+        android:layout_centerHorizontal="true"
         android:text="E-Mail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/txtPemail"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPname"
-        android:layout_below="@+id/textEmail"
+        android:layout_below="@+id/textPEmail"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:cursorVisible="false"
         android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:inputType="textEmailAddress" />
 
     <TextView
-        android:id="@+id/textUsername"
+        android:id="@+id/textPUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPemail"
         android:layout_below="@+id/txtPemail"
+        android:layout_centerHorizontal="true"
         android:text="Username"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/txtPusername"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textUsername"
-        android:layout_below="@+id/textUsername"
+        android:layout_below="@+id/textPUsername"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:cursorVisible="false"
         android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtPusername"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Save"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtPusername"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Cancel"
+        android:visibility="invisible" />
 
 </RelativeLayout>

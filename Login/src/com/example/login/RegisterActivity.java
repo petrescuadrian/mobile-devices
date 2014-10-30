@@ -1,7 +1,12 @@
 package com.example.login;
 
+import java.util.List;
+
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -32,17 +37,56 @@ public class RegisterActivity extends Activity {
 		RregisterBtn = (Button) findViewById(R.id.btnR_Register);
 		RregisterBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				ParseObject testObject = new ParseObject("TestObject");
-				testObject.put("Name", String.valueOf(RnameTxt.getText()));
-				testObject.put("Email", String.valueOf(RemailTxt.getText()));
-				testObject.put("Username", String.valueOf(RusernameTxt.getText()));
-				testObject.put("Password", String.valueOf(RpasswordTxt.getText()));
-				testObject.saveInBackground();
-				Toast.makeText(getApplicationContext(),"Your account has been created!", Toast.LENGTH_SHORT).show();
-				startActivity(new Intent(v.getContext(), MainActivity.class));	
-			}
-        });
+			public void onClick(final View v) {
+				if(RnameTxt.getText().length() != 0){
+					if(RemailTxt.getText().length() != 0){
+						if(RusernameTxt.getText().length() != 0){
+							if(RpasswordTxt.getText().length() != 0){
+								//Make a query to check wether the user already exists
+					    		ParseQuery<ParseObject> query = ParseQuery.getQuery("TestObject");
+					    		//Select where username is @username 
+					    		query.whereEqualTo("Username",RusernameTxt.getText().toString());
+					    		query.findInBackground(new FindCallback<ParseObject>() {
+					    			@Override
+					    			public void done(List<ParseObject> userList, ParseException e) {
+					    				if (e == null) {
+					    					if(userList.size()>0)
+					    						Toast.makeText(getApplicationContext(), "Username "+RusernameTxt.getText().toString()+" already exists !", Toast.LENGTH_LONG).show();
+					    					else   	
+					    					{
+					    						ParseObject testObject = new ParseObject("TestObject");
+					    						testObject.put("Name", String.valueOf(RnameTxt.getText()));
+					    						testObject.put("Email", String.valueOf(RemailTxt.getText()));
+					    						testObject.put("Username", String.valueOf(RusernameTxt.getText()));
+					    						testObject.put("Password", String.valueOf(RpasswordTxt.getText()));
+					    						testObject.saveInBackground();
+					    						Toast.makeText(getApplicationContext(),"Your account has been created!", Toast.LENGTH_SHORT).show();
+					    						startActivity(new Intent(v.getContext(), MainActivity.class));
+					    					}
+					    				} else {
+					    					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+					    				}
+					    			}					
+					    		});
+							}
+							else {
+								Toast.makeText(getApplicationContext(), "Please insert the password!", Toast.LENGTH_SHORT).show();
+							}
+						}
+						else {
+							Toast.makeText(getApplicationContext(), "Please insert the username!", Toast.LENGTH_SHORT).show();
+						}
+					}
+					else {
+						Toast.makeText(getApplicationContext(), "Please insert the e-mail!", Toast.LENGTH_SHORT).show();
+					}
+				}
+				else {
+					Toast.makeText(getApplicationContext(), "Please insert the full name!", Toast.LENGTH_SHORT).show();
+				}
+				
+        }
+		});
 	}
 
 	@Override
@@ -58,9 +102,7 @@ public class RegisterActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
+
 		return super.onOptionsItemSelected(item);
 	}
 }

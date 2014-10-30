@@ -24,6 +24,8 @@ public class MainActivity extends Activity {
 	
 	EditText usernameTxt, passwordTxt;
 	Button loginBtn, registerBtn;
+	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	private String message;
 	
 	
     @Override
@@ -40,6 +42,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(),"Authenticating, please wait ...", Toast.LENGTH_SHORT).show();
 				String usernameTemp = String.valueOf(usernameTxt.getText());
 				String passwordTemp = String.valueOf(passwordTxt.getText());
 				
@@ -53,7 +56,12 @@ public class MainActivity extends Activity {
 				try {
 					List<ParseObject> userList=query.find();
 					if (userList.size()>0){
-						startActivity(new Intent(v.getContext(), ProfileActivity.class));	
+						message=usernameTemp;
+						Intent intent = new Intent(v.getContext(),ProfileActivity.class);
+						//send the user name via intent to be used in profile acitivity
+						intent.putExtra(EXTRA_MESSAGE, message);
+						startActivity(intent);
+						
 					}
 					else{
 						Toast.makeText(getApplicationContext(),"Invalid username or password!", Toast.LENGTH_SHORT).show();
@@ -93,9 +101,6 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 }
