@@ -1,6 +1,13 @@
 package com.example.login;
 
+import java.util.List;
+
+import com.parse.LogInCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
 	
 	EditText usernameTxt, passwordTxt;
 	Button loginBtn, registerBtn;
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +43,29 @@ public class MainActivity extends Activity {
 				String usernameTemp = String.valueOf(usernameTxt.getText());
 				String passwordTemp = String.valueOf(passwordTxt.getText());
 				
-				if ()
-				startActivity(new Intent(v.getContext(), ProfileActivity.class));	
+				ParseQuery<ParseObject> query = ParseQuery.getQuery("TestObject");
+				
+				
+				query.whereEqualTo("Username", usernameTemp);
+				query.whereEqualTo("Password", passwordTemp);
+				
+				
+				try {
+					List<ParseObject> userList=query.find();
+					if (userList.size()>0){
+						startActivity(new Intent(v.getContext(), ProfileActivity.class));	
+					}
+					else{
+						Toast.makeText(getApplicationContext(),"Invalid username or password!", Toast.LENGTH_SHORT).show();
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			
+				
 			}
         });
         

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 	
@@ -38,6 +39,7 @@ public class RegisterActivity extends Activity {
 				testObject.put("Username", String.valueOf(RusernameTxt.getText()));
 				testObject.put("Password", String.valueOf(RpasswordTxt.getText()));
 				testObject.saveInBackground();
+				Toast.makeText(getApplicationContext(),"Your account has been created!", Toast.LENGTH_SHORT).show();
 				startActivity(new Intent(v.getContext(), MainActivity.class));	
 			}
         });
