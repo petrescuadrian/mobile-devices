@@ -20,7 +20,7 @@ import android.widget.Toast;
 public class ProfileActivity extends Activity {
 	
 	EditText PnameTxt, PemailTxt, PusernameTxt;
-	Button saveBtn, cancelBtn;
+	Button saveBtn, cancelBtn, weatherBtn;
 	private String ID;
 	
 	public void getAccountInfo (){
@@ -137,6 +137,16 @@ public class ProfileActivity extends Activity {
 				cancelBtn.setVisibility(View.INVISIBLE);
 			}
         });
+        
+        weatherBtn = (Button) findViewById(R.id.btnWeather);
+        weatherBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(v.getContext(), WeatherActivity.class));	
+			}
+        });
+    
         
         getAccountInfo();
 	}
