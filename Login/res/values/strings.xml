@@ -6,7 +6,7 @@
     <string name="action_edit">Edit</string>
     <string name="title_activity_register">New Account</string>
     <string name="title_activity_profile">Profile</string>
-    <string name="title_activity_weather">WeatherActivity</string>
+    <string name="title_activity_weather">Weather</string>
     <string name="action_settings">Settings</string>
 
 </resources>

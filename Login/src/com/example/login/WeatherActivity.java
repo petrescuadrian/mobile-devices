@@ -1,10 +1,13 @@
 package com.example.login;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +16,8 @@ import org.json.JSONObject;
 import com.example.login.model.Location;
 import com.example.login.model.Weather;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -40,10 +45,7 @@ public class WeatherActivity extends Activity {
 	private ImageView imgView;
 	
 	
-	//LocationManager locationManager = (LocationManager)
-		//	getSystemService(Context.LOCATION_SERVICE);
-			//double latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-			//double longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+	
 	
 
 			
@@ -51,8 +53,27 @@ public class WeatherActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_weather);
+
+		LocationManager locationManager = (LocationManager)
+				getSystemService(Context.LOCATION_SERVICE);
+				double latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
+				double longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
 		
-		String city = "Bucharest,RO";
+		String city = null;
+        Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = gcd.getFromLocation(latitude,
+                    longitude, 1);
+            if (addresses.size() > 0)
+                System.out.println(addresses.get(0).getLocality());
+            city = addresses.get(0).getLocality();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		//String city = "Bucharest,RO";
 		
 		cityText = (TextView) findViewById(R.id.WcityText);
 		condDescr = (TextView) findViewById(R.id.WcondDescr);
@@ -105,6 +126,7 @@ public class WeatherActivity extends Activity {
 				Bitmap img = BitmapFactory.decodeByteArray(weather.iconData, 0, weather.iconData.length); 
 				imgView.setImageBitmap(img);
 			}
+			
 			
 			
 			cityText.setText(weather.location.getCity() + "," + weather.location.getCountry());

@@ -35,7 +35,6 @@ public final class R {
         public static final int WwindDeg=0x7f080021;
         public static final int WwindSpeed=0x7f080020;
         public static final int action_edit=0x7f080022;
-        public static final int action_settings=0x7f080023;
         public static final int btnCancel=0x7f08000e;
         public static final int btnLogin=0x7f080004;
         public static final int btnR_Register=0x7f080016;
