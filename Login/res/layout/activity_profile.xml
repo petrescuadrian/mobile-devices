@@ -98,12 +98,21 @@
         android:visibility="invisible" />
 
     <Button
-        android:id="@+id/btnWeather"
+        android:id="@+id/btnPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSave"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="14dp"
+        android:text="Change Password" />
+
+    <Button
+        android:id="@+id/btnWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text="Show Weather" />
 
 </RelativeLayout>

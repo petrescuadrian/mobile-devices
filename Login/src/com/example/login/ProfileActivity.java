@@ -20,8 +20,10 @@ import android.widget.Toast;
 public class ProfileActivity extends Activity {
 	
 	EditText PnameTxt, PemailTxt, PusernameTxt;
-	Button saveBtn, cancelBtn, weatherBtn;
+	Button saveBtn, cancelBtn, weatherBtn, passwordBtn;
 	private String ID;
+	public final static String EXTRA_MESSAGE2 = "com.example.myfirstapp.MESSAGE";
+	private String message;
 	
 	public void getAccountInfo (){
 		Intent intent = getIntent();
@@ -147,6 +149,18 @@ public class ProfileActivity extends Activity {
 			}
         });
     
+        passwordBtn = (Button) findViewById(R.id.btnPassword);
+        passwordBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				message=PusernameTxt.getText().toString();
+				Intent intent = new Intent(v.getContext(),ChangePasswordActivity.class);
+				//send the user name via intent to be used in profile acitivity
+				intent.putExtra(EXTRA_MESSAGE2, message);
+				startActivity(intent);
+			}
+        });
         
         getAccountInfo();
 	}
